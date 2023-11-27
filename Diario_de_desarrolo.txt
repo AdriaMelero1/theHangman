@@ -1,1 +1,6 @@
 ESCRIBIR CADA DIA QUE HE HECHO Y QUE HARE EL PROXIMO DIA
+27-11-2023: Primer dia, HTML y CSS acabados, interfaz con titulo, vidas, palabra oculta, teclado con estilos (letra contained o not-contained)
+contador de fallos y cuenta atras. Numero de guiones segun caracteres tiene la palabra secreta
+Letras cambian color segun si estan bien o mal
+
+--> Falta que los guines cambien a la letra que toca si esta correcto
