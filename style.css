@@ -122,3 +122,32 @@ p{
 	height: 200px;
 	display: none;
 }
+
+@media screen and (max-width: 640px){
+
+	body{
+		padding: 0;
+	}
+
+	#alphabet{
+		width: 90%;
+		padding: 0;
+	}
+
+	.letter{
+		display: block;
+		text-align: center;
+		font-size: 15px;
+		width: 6.5vw;
+		padding: 10px 0;
+		margin: 3px 3px;
+	}
+
+	.container{
+		margin: 20px;
+		min-width: 0;
+		width: 95%;
+		height: 900px;
+		padding: 30px 0;
+	}
+}
