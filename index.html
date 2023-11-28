@@ -13,9 +13,11 @@
 
 	<div class="container">
 		<h1>the Hangman</h1>
-		<p class="text">You have <span id="lives-left">7</span> lives left</p>
+		<p id="message"></p>
+		<p class="text">You have <span id="livesDisplay">7</span> lives left</p>
+		<img src="icon.png" id="img">
 		<span id="secretWord"></span>
-		<div class="alphabet">
+		<div id="alphabet">
 			<div class="row">
 				<div class="letter" id="q">Q</div>
 				<div class="letter" id="w">W</div>
@@ -50,11 +52,11 @@
 				<div class="letter" id="m">M</div>
 			</div>
 		</div>
-		<p class="text">You did <span id="fails">0</span> fails</p>
+		<p class="text">You did <span id="failsDisplay">0</span> fails</p>
 		<div class="timer">
 			<p>00:00:00</p>
 		</div>
-		</.>
+		<button id="restartBtn">restart</button>
 
 		<video autoplay muted loop id="myVideo">
 			<source src="VidClear_tv-static-noise-hd-1080p-1701113509.mp4" type="video/mp4">
