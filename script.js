@@ -130,7 +130,7 @@ function startGame() {
 	fails = 0;
 	lives = 7;
 	bars = [];
-	word = "mword";
+	word = "viernes";
 	arrWord = [...word.toLocaleLowerCase()];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
