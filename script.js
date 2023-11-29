@@ -38,6 +38,7 @@ function createUnderscores() {
 	displayBars(bars);
 }
 
+
 //First the barsText is empied, then there's a for with iterations for bars.lenght, every iteration the content of that
 //Position of the array (a underscore or a letter from the secretWord) is added to the end of barsText. Then is displayed
 function displayBars(bars) {
@@ -56,18 +57,11 @@ function displayBars(bars) {
 //and its not been clicked yet (checking the classes that are added first time is clicked)  we call checkIfIsContained() function
 //To check if that letter is contained in the secret word by passing that letter as parametter
 container.addEventListener('click', (e) => {
-	if (lives < 1) {
-		gameLost();
-		
-	} else {
-
-		if (e.target.classList.contains('letter')
-			&& !e.target.classList.contains('contained')
-			&& !e.target.classList.contains('not-contained')) {
-			checkIfIsContained(e);
-		}
+	if (e.target.classList.contains('letter')
+		&& !e.target.classList.contains('contained')
+		&& !e.target.classList.contains('not-contained')) {
+		checkIfIsContained(e);
 	}
-
 });
 
 //When this function is called means that the game is over. 
@@ -82,6 +76,7 @@ function gameLost() {
 
 	message.innerText = "GAME OVER";
 	secretWord.innerText = word;
+	console.log(word);
 }
 
 
@@ -97,26 +92,34 @@ function checkIfIsContained(letter) {
 		letter.target.classList.toggle('not-contained');
 		fails++;
 		lives--;
+
 		failsDisplay.innerText = fails;
 		livesDisplay.innerText = lives;
 	}
 
-	for (let i = 0; i < arrWord.length; i++) {
-		if (arrWord[i] == letter.target.id) {
-			bars[i] = letter.target.id;
+	if (lives < 1) {
+		gameLost();
+	} else {
 
-			console.log(bars);
-		}
-		displayBars(bars)
+		for (let i = 0; i < arrWord.length; i++) {
+			if (arrWord[i] == letter.target.id) {
+				bars[i] = letter.target.id;
 
-		if (!bars.includes('_')) {
-			message.style.display = 'block';
-			topText.style.display = 'none';
-			message.innerText = "YOU WON";
-			restartBtn.style.display = 'block';
-			alphabet.style.display = 'none';
+				console.log(bars);
+			}
+			displayBars(bars)
+
+			if (!bars.includes('_')) {
+				message.style.display = 'block';
+				topText.style.display = 'none';
+				message.innerText = "YOU WON";
+				restartBtn.style.display = 'block';
+				alphabet.style.display = 'none';
+			}
 		}
 	}
+
+
 
 }
 
