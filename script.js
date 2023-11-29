@@ -7,13 +7,23 @@ const secretWord = document.getElementById('secretWord');
 const livesDisplay = document.getElementById('livesDisplay');
 const failsDisplay = document.getElementById('failsDisplay');
 const restartBtn = document.getElementById('restartBtn');
-const img = document.getElementById('img');
+const imgwin = document.getElementById('imgwin');
+const imglost = document.getElementById('imglost');
 const message = document.getElementById('message');
 const topText = document.querySelector('.text');
+const timer = document.getElementById('timer');
 
-//Declaration of variables needed for th game
+//Declaration of variables needed for the game
 let fails;
 let lives;
+
+let first;
+
+let theTimer;
+let myTime = new Date();
+myTime.setHours(0, 0, 0, 0);
+timer.innerHTML = '00:00';
+
 
 //bars is the array that will contain as bars as letters contains the secretWord, and the second one is the same but as string 7
 //to print it without the commas
@@ -60,6 +70,11 @@ container.addEventListener('click', (e) => {
 	if (e.target.classList.contains('letter')
 		&& !e.target.classList.contains('contained')
 		&& !e.target.classList.contains('not-contained')) {
+		if (first) {
+			startTimer();
+			console.log("STARTING TIMER");
+			first = false;
+		}
 		checkIfIsContained(e);
 	}
 });
@@ -67,19 +82,28 @@ container.addEventListener('click', (e) => {
 //When this function is called means that the game is over. 
 //So we display and remove from screen some elements, also revealing the secret word
 function gameLost() {
-	topText.style.display = 'none';
-	alphabet.style.display = 'none';
-
-	message.style.display = 'block';
-	restartBtn.style.display = 'block';
-	img.style.display = 'block';
-
-	message.innerText = "GAME OVER";
+	gameEnded();
 	secretWord.innerText = word;
-	console.log(word);
+	imglost.style.display = 'block';
+	message.innerText = "GAME OVER";
 }
 
+function gameWon() {
+	gameEnded();
+	imgwin.style.display = 'block';
+	message.innerText = "YOU WON";
+}
 
+function gameEnded(){
+
+	stopTimer();
+	timer.classList.add('end');
+	message.style.display = 'block';
+	topText.style.display = 'none';
+	restartBtn.style.display = 'block';
+	alphabet.style.display = 'none';
+
+}
 
 
 //Here we check if the letter picked by the user is contained in the secret word
@@ -110,11 +134,7 @@ function checkIfIsContained(letter) {
 			displayBars(bars)
 
 			if (!bars.includes('_')) {
-				message.style.display = 'block';
-				topText.style.display = 'none';
-				message.innerText = "YOU WON";
-				restartBtn.style.display = 'block';
-				alphabet.style.display = 'none';
+				gameWon();
 			}
 		}
 	}
@@ -130,6 +150,7 @@ restartBtn.addEventListener('click', () => {
 });
 
 function startGame() {
+	first = true;
 	fails = 0;
 	lives = 7;
 	bars = [];
@@ -137,12 +158,14 @@ function startGame() {
 	arrWord = [...word.toLocaleLowerCase()];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
-	img.style.display = 'none';
+	imglost.style.display = 'none';
+	imgwin.style.display = 'none';
 	livesDisplay.innerText = lives;
 	failsDisplay.innerText = fails;
 	message.style.display = 'none';
 	topText.style.display = 'block';
 
+	restartTimer();
 	restoreAlphabet();
 	createUnderscores();
 }
@@ -152,4 +175,50 @@ function restoreAlphabet() {
 	for (let i = 0; i < letters.length; i++) {
 		letters[i].classList.remove('contained', 'not-contained');
 	}
+}
+
+
+
+
+
+
+function crono() {
+	let minutes = myTime.getMinutes();
+	let seconds = myTime.getSeconds();
+
+	seconds++;
+
+	if (seconds == 60) {
+		seconds = 0;
+		minutes += 1;
+
+		myTime.setMinutes(minutes);
+	}
+
+	if (minutes == 60) {
+		minutes = 0;
+		myTime.setMinutes(minutes);
+	}
+
+	myTime.setSeconds(seconds);
+
+	if (seconds < 10) { seconds = "0" + seconds }
+	if (minutes < 10) { minutes = "0" + minutes }
+
+	timer.innerHTML = minutes + ":" + seconds;
+}
+
+
+
+function startTimer() {
+	theTimer = setInterval(crono, 1000);
+}
+
+function stopTimer() {
+	clearInterval(theTimer);
+}
+
+function restartTimer() {
+	myTime.setHours(0, 0, 0, 0);
+	timer.innerHTML = "00:00";
 }

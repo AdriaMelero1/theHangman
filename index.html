@@ -15,7 +15,8 @@
 		<h1>the Hangman</h1>
 		<p id="message"></p>
 		<p class="text">You have <span id="livesDisplay">7</span> lives left</p>
-		<img src="icon.png" id="img">
+		<img src="images/imglost.gif" id="imglost">
+		<img src="images/imgwin.gif" id="imgwin">
 		<span id="secretWord"></span>
 		<div id="alphabet">
 			<div class="row">
@@ -53,13 +54,11 @@
 			</div>
 		</div>
 		<p class="text">You did <span id="failsDisplay">0</span> fails</p>
-		<div class="timer">
-			<p>00:00:00</p>
-		</div>
+		<div id="timer"></div>
 		<button id="restartBtn">restart</button>
 
 		<video autoplay muted loop id="myVideo">
-			<source src="VidClear_tv-static-noise-hd-1080p-1701113509.mp4" type="video/mp4">
+			<source src="images/backgroundVideo.mp4" type="video/mp4">
 		</video>
 
 		<script src="script.js"></script>

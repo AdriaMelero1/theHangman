@@ -8,3 +8,4 @@ Si es correcto sale que has ganado, si te quedas sin vidas sale que has perdido,
 
 --> Comprobar vidas mejor, i usar innerHTML en vez de id para cada letra
 --> Falta implementar el cronometro, coger palabras segun categoria del JSON i registrar usuarios i records
+--> Transiciones y efectos en el CSS

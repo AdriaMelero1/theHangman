@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Oswald&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Oswald&family=Raleway&display=swap");
 
-*{
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	border-radius: 10px;
 }
 
-body{
-	font-family: 'Raleway', sans-serif;
+body {
+	font-family: "Raleway", sans-serif;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -17,24 +17,24 @@ body{
 }
 
 #myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
 	z-index: -1;
 }
 
-h1{
+h1 {
 	margin-bottom: 20px;
 }
 
-p{
+p {
 	margin: 5px;
-	font-size: 20px;
+	font-size: 25px;
 }
 
-.text span{
+.text span {
 	color: red;
 }
 
@@ -49,7 +49,7 @@ p{
 	align-items: center;
 }
 
-#alphabet{
+#alphabet {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -60,7 +60,7 @@ p{
 	width: 550px;
 }
 
-.row{
+.row {
 	display: flex;
 }
 
@@ -70,72 +70,93 @@ p{
 	border: 1px solid white;
 	width: 40px;
 	text-align: center;
+	transition: 0.2s;
 }
 
 .letter:hover {
 	font-weight: 800;
+	cursor: pointer;
+	background-color: white;
 	border: 1px solid red;
 	color: red;
-	background-color: white;
-	cursor: pointer;
 }
 
-.letter.contained{
+.letter.contained {
 	background-color: rgb(78, 134, 22);
-	color: black;
+	color: white;
 }
 
-.letter.not-contained{
+.letter.not-contained {
 	background-color: rgb(172, 31, 26);
-	color: black;
+	color: white;
 }
 
-.letter.contained:hover, .letter.not-contained:hover {
+.letter.contained:hover,
+.letter.not-contained:hover {
 	border: 1px solid white;
 	font-weight: initial;
 }
 
-#secretWord{
+#secretWord {
 	padding: 30px 0 20px 0;
 	font-size: 40px;
 }
 
-#restartBtn{
+#restartBtn {
 	display: none;
-	margin-top: 15px;
 	background-color: black;
 	border: 2px solid red;
 	color: white;
 	padding: 5px 10px;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Raleway", sans-serif;
 	font-size: 20px;
 	cursor: pointer;
+	transition: 0.3s;
 }
 
-#restartBtn:hover{
+#restartBtn:hover {
 	background-color: red;
 	color: black;
-	font-weight: 900;
+	font-weight: 800;
 }
 
-#img{
+img {
 	margin-top: 30px;
 	height: 200px;
 	display: none;
+	border: 1px solid white;
 }
 
-@media screen and (max-width: 640px){
 
-	body{
+#timer{
+	margin: 50px;
+	font-size: 25px;
+}
+
+#timer.end{
+	border: 1px solid white;
+	padding: 5px 10px;
+}
+
+#timer.end:hover{
+	color: black;
+	background-color: white;
+	font-weight: 800;
+}
+
+
+
+@media screen and (max-width: 640px) {
+	body {
 		padding: 0;
 	}
 
-	#alphabet{
+	#alphabet {
 		width: 90%;
 		padding: 15px 0;
 	}
 
-	.letter{
+	.letter {
 		display: block;
 		text-align: center;
 		font-size: 15px;
@@ -144,7 +165,7 @@ p{
 		margin: 3px 3px;
 	}
 
-	.container{
+	.container {
 		margin: 20px;
 		min-width: 0;
 		width: 95%;
