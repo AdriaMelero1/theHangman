@@ -6,6 +6,9 @@ Letras cambian color segun si estan bien o mal
 28-11-2023: El juego esta funcionando, pasandole una palabra a lo "bruto" (dentro de una variable)
 Si es correcto sale que has ganado, si te quedas sin vidas sale que has perdido, se enseña una imagen y se revela la palabra secreta.
 
---> Comprobar vidas mejor, i usar innerHTML en vez de id para cada letra
---> Falta implementar el cronometro, coger palabras segun categoria del JSON i registrar usuarios i records
---> Transiciones y efectos en el CSS
+05-12-2023: El juego ahora tiene una pantalla anterior al juego, desde donde podemos elegir la categoria(de momento solo esta el select)
+Y un boton que al clicar aparece el juego, con los temporizadores iniciados. Cuenta atras de 10 segundos,
+resta una vida al llegar a 0 y se reinicia, tambien se reinicia al clicar letras.
+
+--> Falta coger palabras segun categoria del JSON i registrar usuarios i records
+

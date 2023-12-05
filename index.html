@@ -6,12 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>the Hangman</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="shortcut icon" href="icon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
 </head>
 
 <body>
+	<div class="container start">
+		<h1>Welcome to the hangman</h1>
+		<form>
+			<select name="category">
+				<option value="sports">Sports</option>
+				<option value="computers">Computers</option>
+				<option value="coding">Coding</option>
+				<option value="formula1">Formula 1</option>
+				<option value="musicGroups">Music groups</option>
+				<option value="videogames">Videogames</option>
+				<option value="movies">Movies</option>
+			</select>
+		</form>
+		<button id="startBtn">START GAME</button>
+	</div>
 
-	<div class="container">
+	<div class="container game">
 		<h1>the Hangman</h1>
 		<p id="message"></p>
 		<p class="text">You have <span id="livesDisplay">7</span> lives left</p>
@@ -54,15 +69,17 @@
 			</div>
 		</div>
 		<p class="text">You did <span id="failsDisplay">0</span> fails</p>
+		<div id="countdown"></div>
 		<div id="timer"></div>
 		<button id="restartBtn">restart</button>
+		<button id="back">Go Back</button>
 
-		<video autoplay muted loop id="myVideo">
-			<source src="images/backgroundVideo.mp4" type="video/mp4">
-		</video>
-
+		
 		<script src="script.js"></script>
 	</div>
+	<video autoplay muted loop id="myVideo">
+		<source src="images/backgroundVideo.mp4" type="video/mp4">
+	</video>
 </body>
 
 </html>

@@ -1,4 +1,9 @@
 {
 	"sports": ["Futbol", "Tenis"],
-	"computers": ["procesador", "gràfica", "ram"]
+	"computers": ["procesador", "gràfica", "ram"],
+	"coding": ["loop", "variable"],
+	"formula1": ["slipstream", "downforce", "gforce"],
+	"musicGroups": ["nirvana", "metallica", "queen"],
+	"videogames": ["Minecraft", "terraria"],
+	"movies": ["Star Wars", "Pulp Fiction"]
 }

@@ -1,5 +1,6 @@
 //Capture elements from DOM
-const container = document.querySelector('.container');
+const container = document.querySelector('.container.game');
+const startContainer = document.querySelector('.container.start')
 const alphabet = document.getElementById('alphabet');
 const letters = document.getElementsByClassName('letter');
 const availableWords = document.querySelectorAll('.row .letter:not(.contained) .letter:not(.not-contained)');
@@ -7,12 +8,14 @@ const secretWord = document.getElementById('secretWord');
 const livesDisplay = document.getElementById('livesDisplay');
 const failsDisplay = document.getElementById('failsDisplay');
 const restartBtn = document.getElementById('restartBtn');
+const startBtn = document.getElementById('startBtn');
+const backBtn = document.getElementById('back');
 const imgwin = document.getElementById('imgwin');
 const imglost = document.getElementById('imglost');
 const message = document.getElementById('message');
 const topText = document.querySelector('.text');
 const timer = document.getElementById('timer');
-
+const countdown = document.getElementById('countdown');
 //Declaration of variables needed for the game
 let fails;
 let lives;
@@ -21,8 +24,15 @@ let first;
 
 let theTimer;
 let myTime = new Date();
-myTime.setHours(0, 0, 0, 0);
 timer.innerHTML = '00:00';
+
+
+
+let theCountdown;;
+let myCountdown = new Date();
+countdown.innerHTML = '10';
+
+let countdownStarted = false;
 
 
 //bars is the array that will contain as bars as letters contains the secretWord, and the second one is the same but as string 7
@@ -70,12 +80,8 @@ container.addEventListener('click', (e) => {
 	if (e.target.classList.contains('letter')
 		&& !e.target.classList.contains('contained')
 		&& !e.target.classList.contains('not-contained')) {
-		if (first) {
-			startTimer();
-			console.log("STARTING TIMER");
-			first = false;
-		}
 		checkIfIsContained(e);
+		restartCountdown();
 	}
 });
 
@@ -96,7 +102,9 @@ function gameWon() {
 
 function gameEnded(){
 
+	stopCountdown();
 	stopTimer();
+	countdown.style.display = 'none';
 	timer.classList.add('end');
 	message.style.display = 'block';
 	topText.style.display = 'none';
@@ -164,7 +172,10 @@ function startGame() {
 	failsDisplay.innerText = fails;
 	message.style.display = 'none';
 	topText.style.display = 'block';
-
+	timer.classList.remove('end');
+	countdown.style.display = 'block';
+	
+	restartCountdown();
 	restartTimer();
 	restoreAlphabet();
 	createUnderscores();
@@ -222,3 +233,63 @@ function restartTimer() {
 	myTime.setHours(0, 0, 0, 0);
 	timer.innerHTML = "00:00";
 }
+
+
+
+
+
+function cronoCountdown() {
+	let seconds = myCountdown.getSeconds();
+
+	seconds--;
+	countdown.innerHTML = seconds;
+	
+	if(seconds == 0){
+		lives --;
+		if(lives < 1){
+			gameLost();
+		}
+		livesDisplay.innerText = lives;
+
+		restartCountdown();
+
+	} else{
+		
+		myCountdown.setSeconds(seconds);
+	}
+
+
+}
+
+function restartCountdown() {
+
+	stopCountdown();
+	myCountdown.setSeconds(10);
+	countdown.innerHTML = "10";
+	theCountdown = setInterval(cronoCountdown, 1000);
+
+}
+
+function stopCountdown(){
+	clearInterval(theCountdown);
+
+}
+
+
+window.addEventListener('load', () => {
+	container.style.display = 'none';
+})
+
+startBtn.addEventListener('click', () => {
+	startGame();
+	startTimer();
+
+	startContainer.style.display = 'none';
+	container.style.display = 'flex';
+});
+
+backBtn.addEventListener('click', () => {
+	gameEnded();
+	startContainer.style.display = 'flex';
+	container.style.display = 'none';
+});
