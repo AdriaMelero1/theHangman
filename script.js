@@ -45,7 +45,6 @@ let word;
 let arrWord;
 
 //This method starts the game by giving the right value to the variables and displaying necessary elements
-startGame();
 
 
 //This function fills the array bars with same underscores as letters in the array arrWord, then calls displayBars()
@@ -162,7 +161,7 @@ function startGame() {
 	fails = 0;
 	lives = 7;
 	bars = [];
-	word = "viernes";
+	word =  removeAccents("Viérñess");
 	arrWord = [...word.toLocaleLowerCase()];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
@@ -274,6 +273,15 @@ function stopCountdown(){
 	clearInterval(theCountdown);
 
 }
+
+
+
+const removeAccents = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+} 
+
+
+
 
 
 window.addEventListener('load', () => {

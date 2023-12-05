@@ -52,6 +52,7 @@ p {
 .start {
 	height: auto;
 	position: relative;
+	max-width: 500px;
 }
 
 .start >*, .start >* >*{
@@ -192,11 +193,11 @@ img {
 	}
 
 	.start {
-		height: 300px;
+		height: auto;
 	}
 
 	.start h1{
-		font-size: 6vw;
+		font-size: 5vw;
 	}
 }
 
