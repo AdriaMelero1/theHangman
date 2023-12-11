@@ -1,3 +1,6 @@
+import words from "./words.json" assert { type: 'json'}
+
+
 //Capture elements from DOM
 const container = document.querySelector('.container.game');
 const startContainer = document.querySelector('.container.start')
@@ -16,11 +19,10 @@ const message = document.getElementById('message');
 const topText = document.querySelector('.text');
 const timer = document.getElementById('timer');
 const countdown = document.getElementById('countdown');
+const category = document.getElementById('category');
 //Declaration of variables needed for the game
 let fails;
 let lives;
-
-let first;
 
 let theTimer;
 let myTime = new Date();
@@ -31,8 +33,6 @@ timer.innerHTML = '00:00';
 let theCountdown;;
 let myCountdown = new Date();
 countdown.innerHTML = '10';
-
-let countdownStarted = false;
 
 
 //bars is the array that will contain as bars as letters contains the secretWord, and the second one is the same but as string 7
@@ -97,9 +97,10 @@ function gameWon() {
 	gameEnded();
 	imgwin.style.display = 'block';
 	message.innerText = "YOU WON";
+	checkRecord(word);
 }
 
-function gameEnded(){
+function gameEnded() {
 
 	stopCountdown();
 	stopTimer();
@@ -157,11 +158,12 @@ restartBtn.addEventListener('click', () => {
 });
 
 function startGame() {
-	first = true;
+
+
 	fails = 0;
 	lives = 7;
 	bars = [];
-	word =  removeAccents("Viérñess");
+	word = removeAccents(getRamdomWord(category.value));
 	arrWord = [...word.toLocaleLowerCase()];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
@@ -173,9 +175,10 @@ function startGame() {
 	topText.style.display = 'block';
 	timer.classList.remove('end');
 	countdown.style.display = 'block';
-	
+
 	restartCountdown();
 	restartTimer();
+	startTimer();
 	restoreAlphabet();
 	createUnderscores();
 }
@@ -242,18 +245,18 @@ function cronoCountdown() {
 
 	seconds--;
 	countdown.innerHTML = seconds;
-	
-	if(seconds == 0){
-		lives --;
-		if(lives < 1){
+
+	if (seconds == 0) {
+		lives--;
+		if (lives < 1) {
 			gameLost();
 		}
 		livesDisplay.innerText = lives;
 
 		restartCountdown();
 
-	} else{
-		
+	} else {
+
 		myCountdown.setSeconds(seconds);
 	}
 
@@ -269,7 +272,7 @@ function restartCountdown() {
 
 }
 
-function stopCountdown(){
+function stopCountdown() {
 	clearInterval(theCountdown);
 
 }
@@ -277,8 +280,54 @@ function stopCountdown(){
 
 
 const removeAccents = (str) => {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-} 
+	return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+
+
+function getRamdomWord(category) {
+
+	let n = Math.floor(Math.random() * words[category].length);
+	// return words[category][n];
+	return "ab";
+}
+
+
+
+
+function checkRecord(word){
+
+
+	let storedWord = JSON.parse(localStorage.getItem(word));
+
+	try {
+		storedWord 
+		console.log("Word catched: " + storedWord);
+	} catch (error) {
+		console.log("First time for this word");
+	}
+
+	if(!storedWord){
+		localStorage.setItem(word, myTime);
+		console.log("My time: " + myTime);
+	} else {
+		console.log("Last record: " + localStorage.getItem(word));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -290,7 +339,6 @@ window.addEventListener('load', () => {
 
 startBtn.addEventListener('click', () => {
 	startGame();
-	startTimer();
 
 	startContainer.style.display = 'none';
 	container.style.display = 'flex';

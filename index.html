@@ -13,14 +13,13 @@
 	<div class="container start">
 		<h1>Welcome to the hangman</h1>
 		<form>
-			<select name="category">
+			<select id="category">
 				<option value="sports">Sports</option>
 				<option value="computers">Computers</option>
 				<option value="coding">Coding</option>
 				<option value="formula1">Formula 1</option>
 				<option value="musicGroups">Music groups</option>
 				<option value="videogames">Videogames</option>
-				<option value="movies">Movies</option>
 			</select>
 		</form>
 		<button id="startBtn">START GAME</button>
@@ -75,7 +74,7 @@
 		<button id="back">Go Back</button>
 
 		
-		<script src="script.js"></script>
+		<script src="script.js" type="module"></script>
 	</div>
 	<video autoplay muted loop id="myVideo">
 		<source src="images/backgroundVideo.mp4" type="video/mp4">
