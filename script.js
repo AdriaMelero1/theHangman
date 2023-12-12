@@ -175,8 +175,8 @@ function startGame() {
 	fails = 0;
 	lives = 7;
 	bars = [];
-	word = "ho";
-	// word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	// word = "ho";
+	word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
 	arrWord = [...word];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
@@ -373,7 +373,7 @@ function generateRecords() {
 
 
 
-	
+
 	let recordsHtml =	localStorage.getItem('logica');
 
 	return recordsHtml;
