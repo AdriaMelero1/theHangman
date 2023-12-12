@@ -12,5 +12,8 @@ resta una vida al llegar a 0 y se reinicia, tambien se reinicia al clicar letras
 
 
 11-12-2023: Hoy he conseguido que la palabra sea aleatoria y de la categoria introducida por el usuario
---> Falta registrar usuarios i records
+
+12-12-2023: Users and records registered, falta show them
+
+--> Show records and users and develop records screen
 

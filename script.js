@@ -4,15 +4,17 @@ import words from "./words.json" assert { type: 'json'}
 //Capture elements from DOM
 const container = document.querySelector('.container.game');
 const startContainer = document.querySelector('.container.start')
+const recordsContainer = document.querySelector('.container.records')
 const alphabet = document.getElementById('alphabet');
 const letters = document.getElementsByClassName('letter');
-const availableWords = document.querySelectorAll('.row .letter:not(.contained) .letter:not(.not-contained)');
 const secretWord = document.getElementById('secretWord');
 const livesDisplay = document.getElementById('livesDisplay');
 const failsDisplay = document.getElementById('failsDisplay');
 const restartBtn = document.getElementById('restartBtn');
 const startBtn = document.getElementById('startBtn');
-const backBtn = document.getElementById('back');
+const backBtn = document.getElementById('backBtn');
+const backBtnRecords = document.getElementById('backBtnRecords');
+const recordsBtn = document.getElementById('recordsBtn');
 const imgwin = document.getElementById('imgwin');
 const imglost = document.getElementById('imglost');
 const message = document.getElementById('message');
@@ -20,6 +22,11 @@ const topText = document.querySelector('.text');
 const timer = document.getElementById('timer');
 const countdown = document.getElementById('countdown');
 const category = document.getElementById('category');
+const username = document.getElementById('username');
+
+//COUNTDOWN DOESNT STOP WHEN GAME ENDED
+
+
 //Declaration of variables needed for the game
 let fails;
 let lives;
@@ -94,10 +101,10 @@ function gameLost() {
 }
 
 function gameWon() {
-	gameEnded();
 	imgwin.style.display = 'block';
 	message.innerText = "YOU WON";
 	checkRecord(word);
+	gameEnded();
 }
 
 function gameEnded() {
@@ -136,8 +143,6 @@ function checkIfIsContained(letter) {
 		for (let i = 0; i < arrWord.length; i++) {
 			if (arrWord[i] == letter.target.id) {
 				bars[i] = letter.target.id;
-
-				console.log(bars);
 			}
 			displayBars(bars)
 
@@ -244,16 +249,19 @@ function cronoCountdown() {
 	let seconds = myCountdown.getSeconds();
 
 	seconds--;
+	console.log(seconds);
 	countdown.innerHTML = seconds;
 
 	if (seconds == 0) {
 		lives--;
 		if (lives < 1) {
 			gameLost();
-		}
-		livesDisplay.innerText = lives;
+		} else{
 
-		restartCountdown();
+			livesDisplay.innerText = lives;
+			restartCountdown();
+
+		}
 
 	} else {
 
@@ -274,7 +282,6 @@ function restartCountdown() {
 
 function stopCountdown() {
 	clearInterval(theCountdown);
-
 }
 
 
@@ -295,23 +302,33 @@ function getRamdomWord(category) {
 
 
 
-function checkRecord(word){
+function checkRecord(word) {
+
+	//First check if theres a record for this word
+	let record = JSON.parse(localStorage.getItem(word));
+
+	//Capture the time the user spent
+	let time = myTime.getSeconds();
+
+	let newRecord = [username.value, time];
 
 
-	let storedWord = JSON.parse(localStorage.getItem(word));
-
-	try {
-		storedWord 
-		console.log("Word catched: " + storedWord);
-	} catch (error) {
-		console.log("First time for this word");
-	}
-
-	if(!storedWord){
-		localStorage.setItem(word, myTime);
-		console.log("My time: " + myTime);
+	//If its first time for this word
+	if (!record) {
+		//Create the item in localstorage with the time spent (always its a record because its first time)
+		localStorage.setItem(word, JSON.stringify(newRecord));
+		console.log(`You set the first record for this word: "${word}" --> ${time} Seconds`);
 	} else {
-		console.log("Last record: " + localStorage.getItem(word));
+		//If the word has been already played, we check if the time its faster than the previous record
+		if(time < record){
+			//If its faster, we update the record time value for that word
+			console.log("New record!" + myTime.getSeconds);
+			localStorage.setItem(word, JSON.stringify(newRecord));
+		} else {
+			//If theres a faster time set, we show the record and the user who did it
+			console.log("Actual record: " + record[1] + " seconds, set by: " + record[0]);
+		}
+
 	}
 }
 
@@ -319,7 +336,25 @@ function checkRecord(word){
 
 
 
+function logIn(username) {
 
+	// First, try to get the item users from localStorage
+	let users = JSON.parse(localStorage.getItem('users'));
+
+	// If there's no item, create an empty array
+	if (!users) {
+		users = [];
+	}
+
+	if (users.includes(username)) {
+		console.log("User already exists");
+	} else {
+		console.log("New user " + username);
+		users.push(username);
+		console.log("Users array: " + users);
+		localStorage.setItem('users', JSON.stringify(users));
+	}
+}
 
 
 
@@ -338,14 +373,41 @@ window.addEventListener('load', () => {
 })
 
 startBtn.addEventListener('click', () => {
-	startGame();
 
-	startContainer.style.display = 'none';
-	container.style.display = 'flex';
+	if (username.value != '') {
+		logIn(username.value);
+		startGame();
+		startContainer.style.display = 'none';
+		container.style.display = 'flex';
+	} else {
+		username.classList.add('red');
+		username.placeholder = "Please enter a username"
+	}
+
 });
 
 backBtn.addEventListener('click', () => {
 	gameEnded();
+	username.value = "";
+	username.classList.remove('red');
+
 	startContainer.style.display = 'flex';
 	container.style.display = 'none';
+	recordsContainer.style.display = 'none';
+});
+
+backBtnRecords.addEventListener('click', () => {
+	username.value = "";
+	username.classList.remove('red');
+
+	startContainer.style.display = 'flex';
+	container.style.display = 'none';
+	recordsContainer.style.display = 'none';
+});
+
+
+recordsBtn.addEventListener('click', () => {
+	startContainer.style.display = 'none';
+	container.style.display = 'none';
+	recordsContainer.style.display = 'flex';
 });

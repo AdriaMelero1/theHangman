@@ -25,9 +25,6 @@ body {
 	z-index: -1;
 }
 
-h1 {
-	margin-bottom: 20px;
-}
 
 p {
 	margin: 20px;
@@ -44,6 +41,7 @@ p {
 	padding: 50px 50px 20px 50px;
 	width: 80%;
 	min-width: 600px;
+	min-height: 600px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -55,10 +53,10 @@ p {
 	max-width: 500px;
 }
 
-.start >*, .start >* >*{
-	margin: 50px !important;
+.start > *,
+.start > * > * {
+	margin: 30px !important;
 }
-
 
 #alphabet {
 	display: flex;
@@ -109,11 +107,15 @@ p {
 }
 
 #secretWord {
-	padding: 30px 0 20px 0;
+	padding: 10px 0 10px 0;
 	font-size: 40px;
 }
 
-button, option, select{
+button,
+option,
+select,
+#username {
+	text-align: center;
 	display: block;
 	background-color: black;
 	border: 2px solid red;
@@ -123,7 +125,22 @@ button, option, select{
 	font-size: 20px;
 	cursor: pointer;
 	transition: 0.3s;
-	margin: 20px;
+	margin: 10px;
+}
+
+#username {
+	width: 300px;
+}
+
+#username.red::placeholder{
+	color: red;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 }
 
 
@@ -135,35 +152,32 @@ button, option, select{
 
 img {
 	margin-top: 30px;
-	height: 200px;
+	height: 150px;
 	display: none;
 	border: 1px solid white;
 }
 
-
-#timer{
+#timer {
 	margin: 20px;
 	font-size: 25px;
 }
 
-#timer.end{
+#timer.end {
 	border: 1px solid white;
 	padding: 5px 10px;
 }
 
-#timer.end:hover{
+#timer.end:hover {
 	color: black;
 	background-color: white;
 	font-weight: 800;
 }
 
-#countdown{
+#countdown {
 	font-size: 30px;
 	color: red;
-	margin: 20px;
+	margin: 10px;
 }
-
-
 
 @media screen and (max-width: 640px) {
 	body {
@@ -186,28 +200,44 @@ img {
 
 	.container {
 		margin: 20px;
+		margin-bottom: 0;
 		min-width: 0;
 		width: 95%;
-		height: 165vw;
+		height: device-height;
 		padding: 30px 0;
+		position: absolute;
 	}
+
 
 	.start {
 		height: auto;
 	}
 
-	.start h1{
+	.start h1 {
 		font-size: 5vw;
 	}
 }
 
-#back{
+#backBtn, #backBtnRecords {
 	position: fixed;
-	bottom: 10px;
+	bottom: 20px;
 	left: 10px;
 }
 
 #startBtn {
+	margin-top: 40px !important;
+	position: absolute;
+	bottom: 80px;
+}
+
+
+#recordsBtn{
 	position: absolute;
 	bottom: 0;
+	font-size: 15px;
+}
+
+
+.container.records{
+	display: none;
 }

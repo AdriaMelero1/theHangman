@@ -4,6 +4,5 @@
 	"coding": ["loop", "variable", "Funcion", "Condicion", "Declaracion", "Asignacion", "Iteracion", "Compilador", "Depuracion", "Ejecucion", "Logica", "Sintaxis", "Clase", "Metodo", "Objeto", "Herencia", "Polimorfismo", "Encapsulamiento", "Compilacion", "Interpretacion", "Framework", "Desarrollo"],
 	"formula1": ["slipstream", "downforce", "gforce", "Pitstop", "Neumatico", "Combustible", "Escuderia", "Piloto", "Carrera", "Curva", "Recta", "Boxes", "Cronometro", "VueltaRapida", "Chasis", "Aerodinamica", "Paddock", "Escalon", "Frenos", "Embrague", "Suspension", "Volante"],
 	"musicGroups": ["nirvana", "metallica", "queen", "Beatles", "RollingStones", "LedZeppelin", "PinkFloyd", "ACDC", "U2", "Radiohead", "Coldplay", "GreenDay", "LinkinPark", "GunsNRoses", "FooFighters", "RedHotChiliPeppers", "Queen", "Blur", "Oasis", "ArcticMonkeys", "Muse", "TheWho"],
-	"videogames": ["Minecraft", "terraria", "Mario", "Zelda", "Pokemon", "Fortnite", "Overwatch", "Dota", "LeagueOfLegends", "CallOfDuty", "Battlefield", "AssassinsCreed", "Fallout", "Skyrim", "Witcher", "FIFA", "NBA2K", "GTA", "Halo", "MortalKombat", "FinalFantasy", "Destiny"],	
-	"movies": ["Star Wars", "Pulp Fiction"]
+	"videogames": ["Minecraft", "terraria", "Mario", "Zelda", "Pokemon", "Fortnite", "Overwatch", "Dota", "LeagueOfLegends", "CallOfDuty", "Battlefield", "AssassinsCreed", "Fallout", "Skyrim", "Witcher", "FIFA", "NBA2K", "GTA", "Halo", "MortalKombat", "FinalFantasy", "Destiny"]
 }

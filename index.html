@@ -13,6 +13,7 @@
 	<div class="container start">
 		<h1>Welcome to the hangman</h1>
 		<form>
+			<input type="text" id="username" placeholder="Enter your username">
 			<select id="category">
 				<option value="sports">Sports</option>
 				<option value="computers">Computers</option>
@@ -23,6 +24,7 @@
 			</select>
 		</form>
 		<button id="startBtn">START GAME</button>
+		<button id="recordsBtn">VIEW RECORDS</button>
 	</div>
 
 	<div class="container game">
@@ -71,10 +73,14 @@
 		<div id="countdown"></div>
 		<div id="timer"></div>
 		<button id="restartBtn">restart</button>
-		<button id="back">Go Back</button>
+		<button id="backBtn">Go Back</button>
 
 		
 		<script src="script.js" type="module"></script>
+	</div>
+	<div class="container records">
+		<button id="backBtnRecords">Go Back</button>
+
 	</div>
 	<video autoplay muted loop id="myVideo">
 		<source src="images/backgroundVideo.mp4" type="video/mp4">
