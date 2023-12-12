@@ -5,6 +5,8 @@ import words from "./words.json" assert { type: 'json'}
 const container = document.querySelector('.container.game');
 const startContainer = document.querySelector('.container.start')
 const recordsContainer = document.querySelector('.container.records')
+const records = document.querySelector('#records')
+const title = document.getElementById('title');
 const alphabet = document.getElementById('alphabet');
 const letters = document.getElementsByClassName('letter');
 const secretWord = document.getElementById('secretWord');
@@ -13,6 +15,7 @@ const failsDisplay = document.getElementById('failsDisplay');
 const restartBtn = document.getElementById('restartBtn');
 const startBtn = document.getElementById('startBtn');
 const backBtn = document.getElementById('backBtn');
+const deleteBtn = document.getElementById('deleteBtn');
 const backBtnRecords = document.getElementById('backBtnRecords');
 const recordsBtn = document.getElementById('recordsBtn');
 const imgwin = document.getElementById('imgwin');
@@ -26,6 +29,7 @@ const username = document.getElementById('username');
 
 //COUNTDOWN DOESNT STOP WHEN GAME ENDED
 
+let users;
 
 //Declaration of variables needed for the game
 let fails;
@@ -87,7 +91,10 @@ container.addEventListener('click', (e) => {
 		&& !e.target.classList.contains('contained')
 		&& !e.target.classList.contains('not-contained')) {
 		checkIfIsContained(e);
-		restartCountdown();
+		if(lives > 0){
+			
+			restartCountdown();
+		}
 	}
 });
 
@@ -168,8 +175,9 @@ function startGame() {
 	fails = 0;
 	lives = 7;
 	bars = [];
-	word = removeAccents(getRamdomWord(category.value));
-	arrWord = [...word.toLocaleLowerCase()];
+	word = "ho";
+	// word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	arrWord = [...word];
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
 	imglost.style.display = 'none';
@@ -181,8 +189,8 @@ function startGame() {
 	timer.classList.remove('end');
 	countdown.style.display = 'block';
 
-	restartCountdown();
 	restartTimer();
+	restartCountdown();
 	startTimer();
 	restoreAlphabet();
 	createUnderscores();
@@ -249,14 +257,13 @@ function cronoCountdown() {
 	let seconds = myCountdown.getSeconds();
 
 	seconds--;
-	console.log(seconds);
 	countdown.innerHTML = seconds;
 
 	if (seconds == 0) {
 		lives--;
 		if (lives < 1) {
 			gameLost();
-		} else{
+		} else {
 
 			livesDisplay.innerText = lives;
 			restartCountdown();
@@ -295,8 +302,8 @@ const removeAccents = (str) => {
 function getRamdomWord(category) {
 
 	let n = Math.floor(Math.random() * words[category].length);
-	// return words[category][n];
-	return "ab";
+	return words[category][n];
+	// return "ab";
 }
 
 
@@ -309,23 +316,29 @@ function checkRecord(word) {
 
 	//Capture the time the user spent
 	let time = myTime.getSeconds();
+	if(myTime.getMinutes() > 0){
+		time += (myTime.getMinutes() * 60);
+	}
+	
 
-	let newRecord = [username.value, time];
+	let newRecord = [username.value, time, fails];
 
 
 	//If its first time for this word
 	if (!record) {
 		//Create the item in localstorage with the time spent (always its a record because its first time)
 		localStorage.setItem(word, JSON.stringify(newRecord));
-		console.log(`You set the first record for this word: "${word}" --> ${time} Seconds`);
+		title.innerHTML = "You set the first record for this word! <br>Time: " + time + " Seconds";
 	} else {
 		//If the word has been already played, we check if the time its faster than the previous record
-		if(time < record){
+		if (time < record[1]) {
 			//If its faster, we update the record time value for that word
-			console.log("New record!" + myTime.getSeconds);
+			title.innerText = "New record! " + time + " seconds";
 			localStorage.setItem(word, JSON.stringify(newRecord));
 		} else {
 			//If theres a faster time set, we show the record and the user who did it
+			title.innerHTML = "Actual record: " + record[1] + " seconds <br> by: " + record[0];
+
 			console.log("Actual record: " + record[1] + " seconds, set by: " + record[0]);
 		}
 
@@ -333,18 +346,18 @@ function checkRecord(word) {
 }
 
 
-
-
-
-function logIn(username) {
-
+function openCreateDB() {
 	// First, try to get the item users from localStorage
-	let users = JSON.parse(localStorage.getItem('users'));
+	users = JSON.parse(localStorage.getItem('users'));
 
 	// If there's no item, create an empty array
 	if (!users) {
 		users = [];
 	}
+}
+
+
+function logIn(username) {
 
 	if (users.includes(username)) {
 		console.log("User already exists");
@@ -356,7 +369,15 @@ function logIn(username) {
 	}
 }
 
+function generateRecords() {
 
+
+
+	
+	let recordsHtml =	localStorage.getItem('logica');
+
+	return recordsHtml;
+}
 
 
 
@@ -369,6 +390,7 @@ function logIn(username) {
 
 
 window.addEventListener('load', () => {
+	openCreateDB();
 	container.style.display = 'none';
 })
 
@@ -394,6 +416,7 @@ backBtn.addEventListener('click', () => {
 	startContainer.style.display = 'flex';
 	container.style.display = 'none';
 	recordsContainer.style.display = 'none';
+	deleteBtn.style.display ="none";
 });
 
 backBtnRecords.addEventListener('click', () => {
@@ -410,4 +433,31 @@ recordsBtn.addEventListener('click', () => {
 	startContainer.style.display = 'none';
 	container.style.display = 'none';
 	recordsContainer.style.display = 'flex';
+
+	records.innerHTML = generateRecords();
+});
+
+username.addEventListener('keyup', () => {
+	if (users.includes(username.value.trim())) {
+		username.style.width = "300px";
+		deleteBtn.style.display = "block";
+	} else {
+		deleteBtn.style.display = "none"
+	}
+});
+
+
+deleteBtn.addEventListener('click', () => {
+	
+	let index = users.indexOf(username.value);
+
+	users.splice(index, 1);
+	
+	localStorage.setItem('users', JSON.stringify(users));
+
+	username.value = "";
+
+	deleteBtn.style.display = "none";
+	username.style.width = "300px";
+
 });

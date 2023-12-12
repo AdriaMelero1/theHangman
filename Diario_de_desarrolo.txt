@@ -10,7 +10,6 @@ Si es correcto sale que has ganado, si te quedas sin vidas sale que has perdido,
 Y un boton que al clicar aparece el juego, con los temporizadores iniciados. Cuenta atras de 10 segundos,
 resta una vida al llegar a 0 y se reinicia, tambien se reinicia al clicar letras.
 
-
 11-12-2023: Hoy he conseguido que la palabra sea aleatoria y de la categoria introducida por el usuario
 
 12-12-2023: Users and records registered, falta show them

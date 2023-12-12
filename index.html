@@ -12,8 +12,11 @@
 <body>
 	<div class="container start">
 		<h1>Welcome to the hangman</h1>
-		<form>
+		<div class="user">
 			<input type="text" id="username" placeholder="Enter your username">
+			<button id="deleteBtn">Delete</button>
+		</div>
+		<form>
 			<select id="category">
 				<option value="sports">Sports</option>
 				<option value="computers">Computers</option>
@@ -28,7 +31,7 @@
 	</div>
 
 	<div class="container game">
-		<h1>the Hangman</h1>
+		<h1 id="title">the Hangman</h1>
 		<p id="message"></p>
 		<p class="text">You have <span id="livesDisplay">7</span> lives left</p>
 		<img src="images/imglost.gif" id="imglost">
@@ -75,11 +78,15 @@
 		<button id="restartBtn">restart</button>
 		<button id="backBtn">Go Back</button>
 
-		
+
 		<script src="script.js" type="module"></script>
 	</div>
 	<div class="container records">
 		<button id="backBtnRecords">Go Back</button>
+
+		<div id="records">
+			
+		</div>
 
 	</div>
 	<video autoplay muted loop id="myVideo">
