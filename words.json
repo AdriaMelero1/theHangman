@@ -1,8 +1,8 @@
 {
-	"sports": ["Futbol", "Tenis", "Gol", "Porteria", "Balon", "Arbitro", "Delantero", "Defensa", "Centrocampista", "Remate", "Tactica", "Offside", "Penalti", "Saque", "Regate", "Cancha", "Entrenador", "Celebracion", "Tarjeta", "Hattrick", "Arco", "Empate"],
-	"computers": ["procesador", "grafica", "ram", "Teclado", "Mouse", "Monitor", "DiscoDuro", "SSD", "TarjetaMadre", "FuentePoder", "Ventilador", "Conector", "Pantalla", "Resolucion", "Programa", "Algoritmo", "Interfaz", "MemoriaCache", "GPU", "CPU", "Ensamblaje", "Energia"],
-	"coding": ["loop", "variable", "Funcion", "Condicion", "Declaracion", "Asignacion", "Iteracion", "Compilador", "Depuracion", "Ejecucion", "Logica", "Sintaxis", "Clase", "Metodo", "Objeto", "Herencia", "Polimorfismo", "Encapsulamiento", "Compilacion", "Interpretacion", "Framework", "Desarrollo"],
-	"formula1": ["slipstream", "downforce", "gforce", "Pitstop", "Neumatico", "Combustible", "Escuderia", "Piloto", "Carrera", "Curva", "Recta", "Boxes", "Cronometro", "VueltaRapida", "Chasis", "Aerodinamica", "Paddock", "Escalon", "Frenos", "Embrague", "Suspension", "Volante"],
-	"musicGroups": ["nirvana", "metallica", "queen", "Beatles", "RollingStones", "LedZeppelin", "PinkFloyd", "ACDC", "U2", "Radiohead", "Coldplay", "GreenDay", "LinkinPark", "GunsNRoses", "FooFighters", "RedHotChiliPeppers", "Queen", "Blur", "Oasis", "ArcticMonkeys", "Muse", "TheWho"],
-	"videogames": ["Minecraft", "terraria", "Mario", "Zelda", "Pokemon", "Fortnite", "Overwatch", "Dota", "LeagueOfLegends", "CallOfDuty", "Battlefield", "AssassinsCreed", "Fallout", "Skyrim", "Witcher", "FIFA", "NBA2K", "GTA", "Halo", "MortalKombat", "FinalFantasy", "Destiny"]
-}
+	"sports": ["Football", "Tennis", "Goal", "Goalkeeper", "Ball", "Referee", "Forward", "Defender", "Midfielder", "Shot", "Tactics", "Offside", "Penalty", "Kickoff", "Dribble"],
+	"computers": ["Processor", "Graphics", "RAM", "Keyboard", "Mouse", "Monitor", "HardDrive", "SSD", "Motherboard", "PowerSupply", "Fan", "Connector", "Screen", "Resolution", "Program"],
+	"coding": ["Loop", "Variable", "Function", "Condition", "Declaration", "Assignment", "Iteration", "Compiler", "Debugging", "Execution", "Logic", "Syntax", "Class", "Method", "Object"],
+	"formula1": ["Slipstream", "Downforce", "Gforce", "Pitstop", "Tire", "Fuel", "Team", "Driver", "Race", "Curve", "Straight", "Boxes", "Chronometer", "FastestLap", "Chassis"],
+	"musicGroups": ["Nirvana", "Metallica", "Queen", "Beatles", "RollingStones", "LedZeppelin", "PinkFloyd", "ACDC", "U2", "Radiohead", "Coldplay", "GreenDay", "LinkinPark", "GunsNRoses", "FooFighters"],
+	"videogames": ["Minecraft", "Terraria", "Mario", "Zelda", "Pokemon", "Fortnite", "Overwatch", "Dota", "LeagueOfLegends", "CallOfDuty", "Battlefield", "AssassinsCreed", "Fallout", "Skyrim", "Witcher"]
+	}

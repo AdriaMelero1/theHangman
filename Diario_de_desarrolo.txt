@@ -1,4 +1,3 @@
-ESCRIBIR CADA DIA QUE HE HECHO Y QUE HARE EL PROXIMO DIA
 27-11-2023: Primer dia, HTML y CSS acabados, interfaz con titulo, vidas, palabra oculta, teclado con estilos (letra contained o not-contained)
 contador de fallos y cuenta atras. Numero de guiones segun caracteres tiene la palabra secreta
 Letras cambian color segun si estan bien o mal
@@ -12,7 +11,7 @@ resta una vida al llegar a 0 y se reinicia, tambien se reinicia al clicar letras
 
 11-12-2023: Hoy he conseguido que la palabra sea aleatoria y de la categoria introducida por el usuario
 
-12-12-2023: Users and records registered, falta show them
+12-12-2023: Usuarios y records registrados
 
---> Show records and users and develop records screen
+13-12-2023: Juego acabado y comentado, he solucionado errores y cambios en los estilos.
 
