@@ -85,21 +85,7 @@ function displayBars(bars) {
 	secretWord.innerText = barsText;
 }
 
- 
-//Every time we click inside the container,first we check if we still hav lives. If yes, we check if there's a letter.If not, we call gameLost(). If there's a letter 
-//and its not been clicked yet (checking the classes that are added first time is clicked)  we call checkIfIsContained() function
-//To check if that letter is contained in the secret word by passing that letter as parametter
-container.addEventListener('click', (e) => {
-	if (e.target.classList.contains('letter')
-		&& !e.target.classList.contains('contained')
-		&& !e.target.classList.contains('not-contained')) {
-		checkIfIsContained(e);
-		if(lives > 0){
-			
-			restartCountdown();
-		}
-	}
-});
+
 
 //When this function is called means that the game is over. 
 //So we display and remove from screen some elements, also revealing the secret word
@@ -122,8 +108,8 @@ function gameWon() {
 
 //This function calls 2 other functions to stop timers, and sets the screen acording to the game ended screen
 function gameEnded() {
-
 	stopCountdown();
+
 	stopTimer();
 	countdown.style.display = 'none';
 	timer.classList.add('end');
@@ -142,7 +128,7 @@ function checkIfIsContained(letter) {
 	if (arrWord.includes(letter.target.id)) {
 		letter.target.classList.toggle('contained');
 
-	//If not, the letter in the keyboard turns red and is not clickable anymore, and 1 fail is added and -1 live
+		//If not, the letter in the keyboard turns red and is not clickable anymore, and 1 fail is added and -1 live
 	} else {
 		letter.target.classList.toggle('not-contained');
 		fails++;
@@ -191,7 +177,6 @@ function startGame() {
 	//The secret word is randomly picked with the getRandomWord function, 
 	//also removed accents with removeAccents function
 	//And set to lowercase
-
 	word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
 	//This is a array with a position for every letter of the word
 	arrWord = [...word];
@@ -232,8 +217,10 @@ function crono() {
 	let minutes = myTime.getMinutes();
 	let seconds = myTime.getSeconds();
 
+	//Seconds increment one
 	seconds++;
 
+	//some checks to make sure time is correct
 	if (seconds == 60) {
 		seconds = 0;
 		minutes += 1;
@@ -246,16 +233,20 @@ function crono() {
 		myTime.setMinutes(minutes);
 	}
 
+	//Add the new sec and min to myTime
 	myTime.setSeconds(seconds);
+	myTime.setMinutes(minutes);
 
+	//Format the time
 	if (seconds < 10) { seconds = "0" + seconds }
 	if (minutes < 10) { minutes = "0" + minutes }
 
+	//Add the time to screen
 	timer.innerHTML = minutes + ":" + seconds;
 }
 
 
-
+//Start, stop and restart timer
 function startTimer() {
 	theTimer = setInterval(crono, 1000);
 }
@@ -272,19 +263,23 @@ function restartTimer() {
 
 
 
-
+//Same function as cromo but for countdown
 function cronoCountdown() {
 	let seconds = myCountdown.getSeconds();
 
+	//Now seconds are minus
 	seconds--;
 	countdown.innerHTML = seconds;
 
+	//If seconds arrive to 0, 1 live is subtracted 
 	if (seconds == 0) {
 		lives--;
+		//If no more lives, gameLost
 		if (lives < 1) {
 			gameLost();
 		} else {
 
+			//If still have lives, restart countdown and display lives left
 			livesDisplay.innerText = lives;
 			restartCountdown();
 
@@ -298,6 +293,7 @@ function cronoCountdown() {
 
 }
 
+//Functions to restart and stop countdown, in this case, when restarting its automatically stoped and started
 function restartCountdown() {
 
 	stopCountdown();
@@ -312,35 +308,35 @@ function stopCountdown() {
 }
 
 
-
+//function to remove accents
 const removeAccents = (str) => {
 	return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 
-
+//Function to get random word from a category received as parameter.
 function getRamdomWord(category) {
 
-	let n = Math.floor(Math.random() * words[category].length);
+	//n is the total words for that category, and the function returns one random word
+	let n = Math.floor(Math.random() * words[category].length - 1);
 	return words[category][n];
-	// return "ab";
 }
 
 
 
-
+//Here we check the records
 function checkRecord(word) {
 
 	//First check if theres a record for this word
 	let record = JSON.parse(localStorage.getItem(word));
-
+	console.log("Record: " + record);
 	//Capture the time the user spent
 	let time = myTime.getSeconds();
-	if(myTime.getMinutes() > 0){
+	if (myTime.getMinutes() > 0) {
 		time += (myTime.getMinutes() * 60);
 	}
-	
 
+	//create a new temporary record to compare with old ones
 	let newRecord = [username.value, time, fails];
 
 
@@ -358,8 +354,8 @@ function checkRecord(word) {
 		} else {
 			//If theres a faster time set, we show the record and the user who did it
 			title.innerHTML = "Actual record: " + record[1] + " seconds <br> by: " + record[0];
-
 			console.log("Actual record: " + record[1] + " seconds, set by: " + record[0]);
+
 		}
 
 	}
@@ -379,16 +375,15 @@ function openCreateDB() {
 
 function logIn(username) {
 
-	if (users.includes(username)) {
-		console.log("User already exists");
-	} else {
-		console.log("New user " + username);
+	//Check if is a new user, we add it to users and update the localstorage
+	if (!users.includes(username)) {
+
 		users.push(username);
-		console.log("Users array: " + users);
 		localStorage.setItem('users', JSON.stringify(users));
 	}
 }
 
+//Generates a html string to display on screen
 function generateRecords() {
 
 	let recordsHtml = "<h1>RECORDS TABLE</h1><p>Record for every word should be generated here</p>"
@@ -399,22 +394,36 @@ function generateRecords() {
 
 
 
-
-
-
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-	openCreateDB();
-	container.style.display = 'none';
+//Every time we click inside the container,first we check if we still hav lives. If yes, we check if there's a letter.If not, we call gameLost(). If there's a letter 
+//and its not been clicked yet (checking the classes that are added first time is clicked)  we call checkIfIsContained() function
+//To check if that letter is contained in the secret word by passing that letter as parametter
+container.addEventListener('click', (e) => {
+	if (e.target.classList.contains('letter')
+		&& !e.target.classList.contains('contained')
+		&& !e.target.classList.contains('not-contained')) {
+		checkIfIsContained(e);
+		if (lives > 0 && bars.includes('_')) {
+			restartCountdown();
+		}
+	}
 });
 
 
-startBtn.addEventListener('', () => {
 
+
+//When the page is loaded, try to open or create the localstorage and set style properties
+window.addEventListener('DOMContentLoaded', () => {
+	openCreateDB();
+	// container.style.display = 'none';
+});
+
+
+//When clicking start button this actions are done, first check theres something typed on username input field and
+//the category is not cat (default)
+startBtn.addEventListener('click', () => {
 
 	if (username.value != '' && category.value != 'cat') {
+		//if not, we call login with the username value always in lowercase, then start game and style properties
 		logIn(username.value.toLocaleLowerCase());
 		startGame();
 		startContainer.style.display = 'none';
@@ -422,7 +431,7 @@ startBtn.addEventListener('', () => {
 	} else {
 		username.classList.add('red');
 		username.placeholder = "Please enter a username"
-		if(category.value == 'cat') {
+		if (category.value == 'cat') {
 			category.style.backgroundColor = "red"
 		}
 	}
@@ -431,7 +440,7 @@ startBtn.addEventListener('', () => {
 
 category.addEventListener('change', () => {
 
-	if(category.value != 'cat') {
+	if (category.value != 'cat') {
 		category.style.backgroundColor = "black"
 
 	}
@@ -447,7 +456,7 @@ backBtn.addEventListener('click', () => {
 	startContainer.style.display = 'flex';
 	container.style.display = 'none';
 	recordsContainer.style.display = 'none';
-	deleteBtn.style.display ="none";
+	deleteBtn.style.display = "none";
 });
 
 backBtnRecords.addEventListener('click', () => {
@@ -479,11 +488,11 @@ username.addEventListener('keyup', () => {
 
 
 deleteBtn.addEventListener('click', () => {
-	
-	let index = users.indexOf(username.value);
+
+	let index = users.indexOf(username.value.toLocaleLowerCase());
 
 	users.splice(index, 1);
-	
+
 	localStorage.setItem('users', JSON.stringify(users));
 
 	username.value = "";

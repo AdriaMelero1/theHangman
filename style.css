@@ -7,6 +7,10 @@
 	border-radius: 10px;
 }
 
+.game{
+	display: none;
+}
+
 body {
 	font-family: "Raleway", sans-serif;
 	display: flex;
