@@ -414,7 +414,6 @@ container.addEventListener('click', (e) => {
 //When the page is loaded, try to open or create the localstorage and set style properties
 window.addEventListener('DOMContentLoaded', () => {
 	openCreateDB();
-	// container.style.display = 'none';
 });
 
 
@@ -429,6 +428,7 @@ startBtn.addEventListener('click', () => {
 		startContainer.style.display = 'none';
 		container.style.display = 'flex';
 	} else {
+		//style modifications modifications so the user understands that category and username is needed to start
 		username.classList.add('red');
 		username.placeholder = "Please enter a username"
 		if (category.value == 'cat') {
@@ -438,15 +438,16 @@ startBtn.addEventListener('click', () => {
 
 });
 
+
+//Back to original style for category when theres a valid category
 category.addEventListener('change', () => {
 
 	if (category.value != 'cat') {
 		category.style.backgroundColor = "black"
-
 	}
-
 });
 
+//Button to turn back, ends the game and style properties
 backBtn.addEventListener('click', () => {
 	gameEnded();
 	username.value = "";
@@ -459,6 +460,7 @@ backBtn.addEventListener('click', () => {
 	deleteBtn.style.display = "none";
 });
 
+//Same back button but for records screen
 backBtnRecords.addEventListener('click', () => {
 	username.value = "";
 	username.classList.remove('red');
@@ -469,6 +471,7 @@ backBtnRecords.addEventListener('click', () => {
 });
 
 
+//Button to acces records screen, text is set using generateRecords
 recordsBtn.addEventListener('click', () => {
 	startContainer.style.display = 'none';
 	container.style.display = 'none';
@@ -477,6 +480,8 @@ recordsBtn.addEventListener('click', () => {
 	records.innerHTML = generateRecords();
 });
 
+//every letter typed in the username field, check if theres a username with that value
+//If yes, a button to delete it is displayed
 username.addEventListener('keyup', () => {
 	if (users.includes(username.value.trim().toLocaleLowerCase())) {
 		username.style.width = "300px";
@@ -486,7 +491,7 @@ username.addEventListener('keyup', () => {
 	}
 });
 
-
+//Button to delete a user and update localstorage with the new array without the deleted user
 deleteBtn.addEventListener('click', () => {
 
 	let index = users.indexOf(username.value.toLocaleLowerCase());
