@@ -405,15 +405,15 @@ function generateRecords() {
 
 
 
-window.addEventListener('DOMContentLoaded', () => {
-	openCreateDB();
-	container.style.display = 'none';
-});
+// window.addEventListener('DOMContentLoaded', () => {
+// 	openCreateDB();
+// 	container.style.display = 'none';
+// });
 
 
 startBtn.addEventListener('click', () => {
 
-
+	openCreateDB();
 	if (username.value != '' && category.value != 'cat') {
 		logIn(username.value.toLocaleLowerCase());
 		startGame();

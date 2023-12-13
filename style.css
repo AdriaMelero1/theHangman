@@ -51,7 +51,7 @@ p {
 	width: 80%;
 	min-width: 600px;
 	min-height: 1600px;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 }
@@ -60,6 +60,7 @@ p {
 	height: auto;
 	position: relative;
 	max-width: 500px;
+	display: flex;
 }
 
 .start > *,
