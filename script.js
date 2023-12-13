@@ -386,10 +386,11 @@ function generateRecords() {
 
 
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
 	openCreateDB();
 	container.style.display = 'none';
-})
+});
+
 
 startBtn.addEventListener('click', () => {
 
