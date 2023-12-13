@@ -14,6 +14,7 @@ body {
 	align-items: center;
 	color: white;
 	padding: 50px;
+	padding-bottom: 0;
 }
 
 h1{
@@ -50,7 +51,7 @@ p {
 	padding: 50px 50px 20px 50px;
 	width: 80%;
 	min-width: 600px;
-	min-height: 1600px;
+	min-height: 850px;
 	display: none;
 	flex-direction: column;
 	align-items: center;

@@ -411,7 +411,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('', () => {
 
 
 	if (username.value != '' && category.value != 'cat') {
