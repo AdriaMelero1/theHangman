@@ -30,11 +30,15 @@ h1{
 	z-index: -1;
 }
 
+#category {
+	margin-bottom: 10px !important;
+}
 
 p {
 	margin: 20px;
 	font-size: 25px;
 }
+
 
 .text span {
 	color: red;
@@ -116,9 +120,19 @@ p {
 	font-size: 40px;
 }
 
+.buttons{
+	display: flex;
+	position: absolute;
+	bottom: 120px;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
 button,
 option,
 select,
+input,
 #username {
 	text-align: center;
 	display: block;
@@ -141,18 +155,36 @@ select,
 	color: red;
 }
 
+
+
 form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0 !important;
+}
+
+#co{
+	margin: 0  20px 0 0!important;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
 }
 
+input[type="number"] {
+	width: 70px;
+}
 
 #restartBtn:hover {
 	background-color: red;
 	color: black;
 	font-weight: 800;
+}
+
+
+#secondsSelector {
+	margin: 0 !important;
 }
 
 img {
@@ -238,7 +270,12 @@ img {
 	}
 
 	#username  {
-		max-width: 250px;
+		max-width: 260px;
+	}
+
+	.buttons {
+		position: absolute;
+		bottom: 140px;
 	}
 }
 
@@ -252,7 +289,17 @@ img {
 	margin-top: 40px !important;
 	position: absolute;
 	bottom: 80px;
+	background-color: red;
+	border-color: white;
+	color: black;
 }
+
+#startBtn:hover {
+	color: red;
+	background-color: white;
+	font-weight: 800;
+}
+
 
 
 #recordsBtn{

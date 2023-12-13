@@ -26,6 +26,7 @@ const timer = document.getElementById('timer');
 const countdown = document.getElementById('countdown');
 const category = document.getElementById('category');
 const username = document.getElementById('username');
+const secondsSelector = document.getElementById('secondsSelector');
 
 //COUNTDOWN DOESNT STOP WHEN GAME ENDED
 
@@ -165,7 +166,7 @@ function checkIfIsContained(letter) {
 
 
 restartBtn.addEventListener('click', () => {
-
+	title.innerText = "The Hangman";
 	startGame();
 });
 
@@ -281,8 +282,8 @@ function cronoCountdown() {
 function restartCountdown() {
 
 	stopCountdown();
-	myCountdown.setSeconds(10);
-	countdown.innerHTML = "10";
+	myCountdown.setSeconds(secondsSelector.value);
+	countdown.innerHTML = secondsSelector.value;
 	theCountdown = setInterval(cronoCountdown, 1000);
 
 }
@@ -371,11 +372,7 @@ function logIn(username) {
 
 function generateRecords() {
 
-
-
-
-	let recordsHtml =	localStorage.getItem('logica');
-
+	let recordsHtml = "<h1>RECORDS TABLE</h1><p>Record for every word should be generated here</p>"
 	return recordsHtml;
 }
 
@@ -396,14 +393,27 @@ window.addEventListener('load', () => {
 
 startBtn.addEventListener('click', () => {
 
-	if (username.value != '') {
-		logIn(username.value);
+
+	if (username.value != '' && category.value != 'cat') {
+		logIn(username.value.toLocaleLowerCase());
 		startGame();
 		startContainer.style.display = 'none';
 		container.style.display = 'flex';
 	} else {
 		username.classList.add('red');
 		username.placeholder = "Please enter a username"
+		if(category.value == 'cat') {
+			category.style.backgroundColor = "red"
+		}
+	}
+
+});
+
+category.addEventListener('change', () => {
+
+	if(category.value != 'cat') {
+		category.style.backgroundColor = "black"
+
 	}
 
 });
@@ -438,7 +448,7 @@ recordsBtn.addEventListener('click', () => {
 });
 
 username.addEventListener('keyup', () => {
-	if (users.includes(username.value.trim())) {
+	if (users.includes(username.value.trim().toLocaleLowerCase())) {
 		username.style.width = "300px";
 		deleteBtn.style.display = "block";
 	} else {
