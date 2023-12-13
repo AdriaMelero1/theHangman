@@ -1,3 +1,4 @@
+//import JSON
 import words from "./words.json" assert { type: 'json'}
 
 
@@ -27,27 +28,28 @@ const countdown = document.getElementById('countdown');
 const category = document.getElementById('category');
 const username = document.getElementById('username');
 const secondsSelector = document.getElementById('secondsSelector');
+const buttons = document.getElementsByClassName('buttons');
 
-//COUNTDOWN DOESNT STOP WHEN GAME ENDED
-
-let users;
 
 //Declaration of variables needed for the game
+let users;
+
 let fails;
 let lives;
 
+//Declare and initialize variables needed for timer
 let theTimer;
 let myTime = new Date();
 timer.innerHTML = '00:00';
 
 
-
+//Declare and initialize variables needed for countdown
 let theCountdown;;
 let myCountdown = new Date();
 countdown.innerHTML = '10';
 
 
-//bars is the array that will contain as bars as letters contains the secretWord, and the second one is the same but as string 7
+//bars is the array that will contain as bars as letters contains the secretWord, and the second one is the same but as string
 //to print it without the commas
 let bars;
 let barsText;
@@ -83,7 +85,7 @@ function displayBars(bars) {
 	secretWord.innerText = barsText;
 }
 
-// 
+ 
 //Every time we click inside the container,first we check if we still hav lives. If yes, we check if there's a letter.If not, we call gameLost(). If there's a letter 
 //and its not been clicked yet (checking the classes that are added first time is clicked)  we call checkIfIsContained() function
 //To check if that letter is contained in the secret word by passing that letter as parametter
@@ -108,6 +110,8 @@ function gameLost() {
 	message.innerText = "GAME OVER";
 }
 
+
+//If the game game is won, 2 functions are called to check if there's a record and to finish the game
 function gameWon() {
 	imgwin.style.display = 'block';
 	message.innerText = "YOU WON";
@@ -115,6 +119,8 @@ function gameWon() {
 	gameEnded();
 }
 
+
+//This function calls 2 other functions to stop timers, and sets the screen acording to the game ended screen
 function gameEnded() {
 
 	stopCountdown();
@@ -132,53 +138,64 @@ function gameEnded() {
 //Here we check if the letter picked by the user is contained in the secret word
 function checkIfIsContained(letter) {
 
+	//If secret word contains the letter, the letter in the keyboard turns green and is not clickable anymore
 	if (arrWord.includes(letter.target.id)) {
 		letter.target.classList.toggle('contained');
 
+	//If not, the letter in the keyboard turns red and is not clickable anymore, and 1 fail is added and -1 live
 	} else {
 		letter.target.classList.toggle('not-contained');
 		fails++;
 		lives--;
 
+		//Update of the info at screen
 		failsDisplay.innerText = fails;
 		livesDisplay.innerText = lives;
 	}
 
+	//If no more lives, call gameLost
 	if (lives < 1) {
 		gameLost();
 	} else {
-
+		//If not, the letter is revealed by changing it for the underscore in it's position
 		for (let i = 0; i < arrWord.length; i++) {
 			if (arrWord[i] == letter.target.id) {
 				bars[i] = letter.target.id;
 			}
+			//Display the bars with the revealed letters
 			displayBars(bars)
 
+			//If the array doesn't contain more bars, means the word's been guessed so we call gameWon
 			if (!bars.includes('_')) {
 				gameWon();
 			}
 		}
 	}
-
-
-
 }
 
-
+//When the game is ended tht restart button appears and clicking it the title text is restored to default and call startGame
 restartBtn.addEventListener('click', () => {
 	title.innerText = "The Hangman";
 	startGame();
 });
 
+
+//Function used to start game
 function startGame() {
 
-
+	//Variables restored to default
 	fails = 0;
 	lives = 7;
 	bars = [];
-	// word = "ho";
+
+	//The secret word is randomly picked with the getRandomWord function, 
+	//also removed accents with removeAccents function
+	//And set to lowercase
+
 	word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	//This is a array with a position for every letter of the word
 	arrWord = [...word];
+	//elements displayed on screen to start the game
 	alphabet.style.display = 'flex';
 	restartBtn.style.display = 'none';
 	imglost.style.display = 'none';
@@ -189,7 +206,7 @@ function startGame() {
 	topText.style.display = 'block';
 	timer.classList.remove('end');
 	countdown.style.display = 'block';
-
+	//Functions called to start the game, restarting timers, restarting keyboard and creating underscores for secret word
 	restartTimer();
 	restartCountdown();
 	startTimer();
@@ -197,6 +214,7 @@ function startGame() {
 	createUnderscores();
 }
 
+//To restore the alphabet, 2 classes are removed from every letter
 function restoreAlphabet() {
 
 	for (let i = 0; i < letters.length; i++) {
@@ -208,8 +226,9 @@ function restoreAlphabet() {
 
 
 
-
+//Function to see the time spent to guess the word
 function crono() {
+	//First get the min and seconds from the time created before
 	let minutes = myTime.getMinutes();
 	let seconds = myTime.getSeconds();
 
@@ -423,6 +442,7 @@ backBtn.addEventListener('click', () => {
 	gameEnded();
 	username.value = "";
 	username.classList.remove('red');
+	category.value = "cat";
 
 	startContainer.style.display = 'flex';
 	container.style.display = 'none';
