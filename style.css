@@ -123,8 +123,8 @@ p {
 
 .buttons{
 	display: flex;
-	position: absolute;
-	bottom: 220px;
+	position: fixed;
+	bottom: 0px;
 	width: 100%;
 	align-items: center;
 	justify-content: center;
@@ -275,8 +275,8 @@ img {
 	}
 
 	.buttons {
-		position: absolute;
-		bottom: 140px;
+		position: fixed;
+		bottom: 0px;
 	}
 }
 
