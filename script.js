@@ -1,6 +1,4 @@
 //import JSON
-import words from "./words.json" assert { type: 'json'}
-
 
 //Capture elements from DOM
 const container = document.querySelector('.container.game');
@@ -32,6 +30,7 @@ const secondsSelector = document.getElementById('secondsSelector');
 
 //Declaration of variables needed for the game
 let users;
+let words;
 
 let fails;
 let lives;
@@ -305,7 +304,7 @@ function restartCountdown() {
 		myCountdown.setSeconds(10);
 		countdown.innerHTML = 10;
 	}
-	
+
 	theCountdown = setInterval(cronoCountdown, 1000);
 
 }
@@ -419,6 +418,7 @@ container.addEventListener('click', (e) => {
 //When the page is loaded, try to open or create the localstorage and set style properties
 window.addEventListener('DOMContentLoaded', () => {
 	openCreateDB();
+	request.send();
 });
 
 
@@ -510,4 +510,14 @@ deleteBtn.addEventListener('click', () => {
 	deleteBtn.style.display = "none";
 	username.style.width = "300px";
 
+});
+
+//Import JSON
+let request = new XMLHttpRequest();
+request.open("GET", "./words.json", true);
+request.addEventListener("readystatechange", function () {
+	if (request.readyState === 4 && request.status === 200) {
+		words = JSON.parse(request.responseText)
+
+	}
 });
