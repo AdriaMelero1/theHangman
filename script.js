@@ -176,8 +176,8 @@ function startGame() {
 	//The secret word is randomly picked with the getRandomWord function, 
 	//also removed accents with removeAccents function
 	//And set to lowercase
-	// word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
-	word = "holla";
+	word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	// word = "holla";
 	//This is a array with a position for every letter of the word
 	arrWord = [...word];
 	//elements displayed on screen to start the game
