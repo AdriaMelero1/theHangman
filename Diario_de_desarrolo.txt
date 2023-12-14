@@ -15,3 +15,4 @@ resta una vida al llegar a 0 y se reinicia, tambien se reinicia al clicar letras
 
 13-12-2023: Juego acabado y comentado, he solucionado errores y cambios en los estilos.
 
+14-12-2023: Creacion de documentación e instrucciones, arreglo de bugs y retoques finales

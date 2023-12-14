@@ -28,7 +28,6 @@ const countdown = document.getElementById('countdown');
 const category = document.getElementById('category');
 const username = document.getElementById('username');
 const secondsSelector = document.getElementById('secondsSelector');
-const buttons = document.getElementsByClassName('buttons');
 
 
 //Declaration of variables needed for the game
@@ -177,7 +176,8 @@ function startGame() {
 	//The secret word is randomly picked with the getRandomWord function, 
 	//also removed accents with removeAccents function
 	//And set to lowercase
-	word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	// word = removeAccents(getRamdomWord(category.value)).toLocaleLowerCase();
+	word = "holla";
 	//This is a array with a position for every letter of the word
 	arrWord = [...word];
 	//elements displayed on screen to start the game
@@ -294,11 +294,18 @@ function cronoCountdown() {
 }
 
 //Functions to restart and stop countdown, in this case, when restarting its automatically stoped and started
+//If the user sets the countdown less than 5 seconds or more than 59 seconds, its automatically set to 10 seconds
 function restartCountdown() {
 
 	stopCountdown();
-	myCountdown.setSeconds(secondsSelector.value);
-	countdown.innerHTML = secondsSelector.value;
+	if (secondsSelector.value > 3 && secondsSelector.value < 59) {
+		myCountdown.setSeconds(secondsSelector.value);
+		countdown.innerHTML = secondsSelector.value;
+	} else {
+		myCountdown.setSeconds(10);
+		countdown.innerHTML = 10;
+	}
+	
 	theCountdown = setInterval(cronoCountdown, 1000);
 
 }
@@ -329,7 +336,6 @@ function checkRecord(word) {
 
 	//First check if theres a record for this word
 	let record = JSON.parse(localStorage.getItem(word));
-	console.log("Record: " + record);
 	//Capture the time the user spent
 	let time = myTime.getSeconds();
 	if (myTime.getMinutes() > 0) {
@@ -354,7 +360,6 @@ function checkRecord(word) {
 		} else {
 			//If theres a faster time set, we show the record and the user who did it
 			title.innerHTML = "Actual record: " + record[1] + " seconds <br> by: " + record[0];
-			console.log("Actual record: " + record[1] + " seconds, set by: " + record[0]);
 
 		}
 
